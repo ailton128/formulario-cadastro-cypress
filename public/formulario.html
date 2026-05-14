@@ -1,0 +1,247 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+  <meta charset="UTF-8">
+  <title>Cadastro de Candidato</title>
+
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 40px;
+    }
+
+    .erro {
+      color: red;
+      font-size: 14px;
+      display: none;
+      margin-top: 4px;
+    }
+
+    #mensagem {
+      color: green;
+      font-weight: bold;
+      margin-top: 20px;
+      display: none;
+    }
+
+    button {
+      padding: 8px 16px;
+      cursor: pointer;
+    }
+  </style>
+</head>
+
+<body>
+
+  <h1>Cadastro de Candidato</h1>
+
+  <form id="form-cadastro" novalidate>
+
+    <!-- NOME -->
+    <label for="nome">Nome:</label>
+    <input type="text" id="nome">
+    <span id="erro-nome" class="erro"></span>
+    <br><br>
+
+    <!-- SOBRENOME -->
+    <label for="sobrenome">Sobrenome:</label>
+    <input type="text" id="sobrenome">
+    <span id="erro-sobrenome" class="erro"></span>
+    <br><br>
+
+    <!-- EMAIL -->
+    <label for="email">Email:</label>
+   <input type="text" id="email">
+    <span id="erro-email" class="erro"></span>
+    <br><br>
+
+    <!-- SENIORIDADE -->
+    <label for="senioridade">Senioridade:</label>
+
+    <select id="senioridade">
+      <option value="">Selecione</option>
+      <option value="Júnior">Júnior</option>
+      <option value="Pleno">Pleno</option>
+      <option value="Sênior">Sênior</option>
+    </select>
+
+    <span id="erro-senioridade" class="erro"></span>
+
+    <br><br>
+
+    <!-- TECNOLOGIAS -->
+    <label>Tecnologias:</label><br>
+
+    <input type="checkbox" id="cypress">
+    <label for="cypress">Cypress</label>
+
+    <br>
+
+    <input type="checkbox" id="selenium">
+    <label for="selenium">Selenium</label>
+
+    <span id="erro-tecnologias" class="erro"></span>
+
+    <br><br>
+
+    <button type="submit" id="enviar">Enviar</button>
+
+  </form>
+
+  <div id="mensagem">
+    Cadastro realizado com sucesso
+  </div>
+
+  <script>
+
+    const form = document.getElementById('form-cadastro');
+    const mensagem = document.getElementById('mensagem');
+
+    form.addEventListener('submit', function (e) {
+
+      e.preventDefault();
+
+      // limpa erros
+      document.querySelectorAll('.erro').forEach(el => {
+        el.textContent = '';
+        el.style.display = 'none';
+      });
+
+      mensagem.style.display = 'none';
+
+      let valido = true;
+
+      const nome = document.getElementById('nome');
+      const sobrenome = document.getElementById('sobrenome');
+      const email = document.getElementById('email');
+      const senioridade = document.getElementById('senioridade');
+
+      const regexNome = /^[A-Za-zÀ-ÿ\s]+$/;
+     const regexEmail = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[A-Za-z]{2,}$/;
+
+      // ===============================
+      // NOME
+      // ===============================
+
+     if (!nome.value.trim()) {
+
+        const span = document.getElementById('erro-nome');
+
+        span.textContent = 'Nome é obrigatório';
+        span.style.display = 'block';
+
+        valido = false;
+
+      } else if (nome.value.length < 2) {
+
+        const span = document.getElementById('erro-nome');
+
+        span.textContent = 'Nome deve ter no mínimo 2 caracteres';
+        span.style.display = 'block';
+
+        valido = false;
+
+      } else if (!regexNome.test(nome.value)) {
+
+        const span = document.getElementById('erro-nome');
+
+        span.textContent = 'Nome deve conter apenas letras';
+        span.style.display = 'block';
+
+        valido = false;
+      }
+
+      // ===============================
+      // SOBRENOME
+      // ===============================
+
+     if (!sobrenome.value.trim()) {
+
+        const span = document.getElementById('erro-sobrenome');
+
+        span.textContent = 'Sobrenome é obrigatório';
+        span.style.display = 'block';
+
+        valido = false;
+
+      } else if (sobrenome.value.length < 2) {
+
+        const span = document.getElementById('erro-sobrenome');
+
+        span.textContent = 'Sobrenome deve ter no mínimo 2 caracteres';
+        span.style.display = 'block';
+
+        valido = false;
+
+      } else if (!regexNome.test(sobrenome.value)) {
+
+        const span = document.getElementById('erro-sobrenome');
+
+        span.textContent = 'Sobrenome deve conter apenas letras';
+        span.style.display = 'block';
+
+        valido = false;
+      }
+
+      // ===============================
+// EMAIL
+// ===============================
+
+if (!email.value.trim()) {
+
+  const span = document.getElementById('erro-email');
+
+  span.textContent = 'Email é obrigatório';
+  span.style.display = 'block';
+
+  valido = false;
+
+} else if (email.value.includes(' ')) {
+
+  const span = document.getElementById('erro-email');
+
+  span.textContent = 'Email inválido';
+  span.style.display = 'block';
+
+  valido = false;
+
+} else if (!regexEmail.test(email.value)) {
+
+  const span = document.getElementById('erro-email');
+
+  span.textContent = 'Email inválido';
+  span.style.display = 'block';
+
+  valido = false;
+}
+
+      // ===============================
+      // SENIORIDADE
+      // ===============================
+
+      if (!senioridade.value) {
+
+        const span = document.getElementById('erro-senioridade');
+
+        span.textContent = 'Selecione a senioridade';
+        span.style.display = 'block';
+
+        valido = false;
+      }
+
+      // ===============================
+      // SUCESSO
+      // ===============================
+
+      if (valido) {
+        mensagem.style.display = 'block';
+      }
+
+    });
+
+  </script>
+
+</body>
+
+</html>
