@@ -1,10 +1,7 @@
-name: Run Cypress Tests
+name: Execute os testes Cypress
 
 on:
   push:
-    branches:
-      - main
-  pull_request:
     branches:
       - main
 
@@ -13,21 +10,22 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Checkout repository
-        uses: actions/checkout@v3
+      - name: Confere o repositório
+        uses: actions/checkout@v4
 
-      - name: Setup Node.js
-        uses: actions/setup-node@v3
+      - name: Configurar o Node.js
+        uses: actions/setup-node@v4
         with:
-          node-version: '18'
+          node-version: 18
 
-      - name: Install dependencies
+      - name: Instalar dependências
         run: npm install
 
-      - name: Start server and run Cypress
-        uses: cypress-io/github-action@v6
-        with:
-          start: npm run dev
-          wait-on: 'http://localhost:3000/public/formulario.html'
-          wait-on-timeout: 60
+      - name: Instalar http-server
+        run: npm install -g http-server
 
+      - name: Inicie o servidor
+        run: http-server . -p 3000 &
+
+      - name: Executar Cypress
+        run: npx cypress run
