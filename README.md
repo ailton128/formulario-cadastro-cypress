@@ -1,5 +1,5 @@
 # 🚀 Projeto de Automação Cypress
-
+![Cypress Tests](https://github.com/ailton128/formulario-cadastro-cypress/actions/workflows/cypress.yml/badge.svg)
 Projeto de automação de testes E2E utilizando Cypress, simulando cenários de cadastro de candidatos em formulário web.
 
 ---
