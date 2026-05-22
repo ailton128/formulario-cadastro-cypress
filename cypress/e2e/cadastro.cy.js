@@ -3,7 +3,7 @@
 describe('Cadastro de Candidato', () => {
 
   beforeEach(() => {
-    cy.visit('http://127.0.0.1:5500/public/formulario.html')
+   cy.visit('http://localhost:3000/public/formulario.html')
   })
 
   function preencherFormularioValido() {
